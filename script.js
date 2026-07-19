@@ -1,4 +1,4 @@
-const menuItems = [
+const defaultMenuItems = [
   { id: 'classic-cold-coffee', name: 'Classic Cold Coffee', category: 'coffee', label: 'Cold coffee', price: 69, description: 'Creamy, cold and always the right answer.', visual: 'coffee' },
   { id: 'dark-chocolate-coffee', name: 'Dark Chocolate Coffee', category: 'coffee', label: 'Cold coffee', price: 79, description: 'Deep cocoa, soft sweetness, zero regrets.', visual: 'coffee-dark' },
   { id: 'oreo-coffee', name: 'Oreo Cold Coffee', category: 'coffee', label: 'Cold coffee', price: 89, description: 'Cookie-loaded for serious cravings.', visual: 'coffee-oreo' },
@@ -15,7 +15,12 @@ const menuItems = [
   { id: 'blueberry-ice-tea', name: 'Blueberry Ice Tea', category: 'coolers', label: 'Ice tea', price: 59, description: 'Fruity, chilled and made for golden hour.', visual: 'cooler-blue' },
 ];
 
+const savedMenu = JSON.parse(localStorage.getItem('cngCafeMenu') || 'null');
+const menuItems = Array.isArray(savedMenu) && savedMenu.length ? savedMenu : defaultMenuItems;
+
 const whatsappNumber = '918800325150';
+const cafeSettings = JSON.parse(localStorage.getItem('cngCafeSettings') || '{}');
+const configuredWhatsapp = cafeSettings.whatsapp || whatsappNumber;
 const menuGrid = document.querySelector('#menu-grid');
 const categoryButtons = [...document.querySelectorAll('.menu-tab')];
 const orderList = document.querySelector('#order-list');
@@ -26,6 +31,18 @@ const cartDockTotal = document.querySelector('#cart-dock-total');
 const cartDockCount = document.querySelector('.cart-dock__icon span');
 const cartHeadCount = document.querySelector('#cart-head-count');
 const selectedOrder = new Map();
+
+document.querySelectorAll('a[href^="tel:"]').forEach((link) => {
+  if (cafeSettings.contact) {
+    const digits = cafeSettings.contact.replace(/[^0-9+]/g, '');
+    link.href = `tel:${digits}`;
+    link.textContent = cafeSettings.contact;
+  }
+});
+document.querySelectorAll('.form-note b').forEach((label) => { if (cafeSettings.contact) label.textContent = cafeSettings.contact; });
+document.querySelectorAll('a[href*="instagram.com"]').forEach((link) => { if (cafeSettings.instagram) link.href = cafeSettings.instagram; });
+const announcementCopy = document.querySelector('.announcement > span:nth-child(2)');
+if (announcementCopy && cafeSettings.announcement) announcementCopy.textContent = cafeSettings.announcement;
 
 function renderMenu(category = 'all') {
   if (!menuGrid) return;
@@ -130,7 +147,7 @@ document.querySelector('#preorder-form')?.addEventListener('submit', (event) => 
   const items = [...selectedOrder.entries()].map(([id, quantity]) => { const item = menuItems.find((entry) => entry.id === id); return `• ${item.name} x${quantity} — ₹${item.price * quantity}`; });
   const total = [...selectedOrder.entries()].reduce((sum, [id, quantity]) => sum + menuItems.find((item) => item.id === id).price * quantity, 0);
   const message = `*New CNG CAFE Pre-order*\n\n*Name:* ${form.get('name')}\n*Phone:* ${form.get('phone')}\n*Pick-up:* ${form.get('pickup')}\n\n*Order:*\n${items.join('\n')}\n\n*Estimated total:* ₹${total}\n*Notes:* ${form.get('notes') || 'None'}`;
-  window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+  window.open(`https://wa.me/${configuredWhatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
 });
 
 renderMenu();
