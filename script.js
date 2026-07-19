@@ -1,18 +1,18 @@
 const menuItems = [
-  { id: 'classic-cold-coffee', name: 'Classic Cold Coffee', category: 'coffee', label: 'Cold coffee', price: 69, description: 'Creamy, cold and always the right answer.', art: '🥤' },
-  { id: 'dark-chocolate-coffee', name: 'Dark Chocolate Coffee', category: 'coffee', label: 'Cold coffee', price: 79, description: 'Deep cocoa, soft sweetness, zero regrets.', art: '🍫' },
-  { id: 'oreo-coffee', name: 'Oreo Cold Coffee', category: 'coffee', label: 'Cold coffee', price: 89, description: 'Cookie-loaded for serious cravings.', art: '◉' },
-  { id: 'kulhad-chai', name: 'Kulhad Masala Chai', category: 'coffee', label: 'Chai', price: 20, description: 'Spiced, warm and poured in a little kulhad.', art: '☕' },
-  { id: 'crispy-vada-pav', name: 'Crispy Vada Pav', category: 'bites', label: 'Mumbai special', price: 45, description: 'Crunchy, buttery and properly chutney-d.', art: '🍔' },
-  { id: 'paneer-burger', name: 'Paneer Patty Burger', category: 'bites', label: 'Burgers', price: 99, description: 'Big flavour, soft bun, full comfort mode.', art: '🍔' },
-  { id: 'salty-fries', name: 'Classic Salty Fries', category: 'bites', label: 'Quick bites', price: 69, description: 'The table disappears when these arrive.', art: '🍟' },
-  { id: 'kurkure-momos', name: 'Veg Kurkure Momos', category: 'bites', label: 'Quick bites', price: 99, description: 'Ten crispy reasons to share. Or not.', art: '🥟' },
-  { id: 'mix-veg-sandwich', name: 'Mix Veg Sandwich', category: 'sandwiches', label: 'Hot & grill', price: 49, description: 'Toasty, cheesy and made for one-hand eating.', art: '🥪' },
-  { id: 'paneer-tikka-sandwich', name: 'Paneer Tikka Sandwich', category: 'sandwiches', label: 'Hot & grill', price: 59, description: 'Smoky paneer, melty cheese, toasted edges.', art: '🧀' },
-  { id: 'pizza-sandwich', name: 'Mix Veg Pizza Sandwich', category: 'sandwiches', label: 'Hot & grill', price: 69, description: 'Pizza energy, sandwich convenience.', art: '🍕' },
-  { id: 'watermelon-ice', name: 'Watermelon Ice', category: 'coolers', label: 'Mojito', price: 59, description: 'Fresh, fizzy and very good at disappearing.', art: '🍉' },
-  { id: 'lemon-mint', name: 'Lemon Cool Mint', category: 'coolers', label: 'Mojito', price: 59, description: 'Bright citrus with a cool mint finish.', art: '🍋' },
-  { id: 'blueberry-ice-tea', name: 'Blueberry Ice Tea', category: 'coolers', label: 'Ice tea', price: 59, description: 'Fruity, chilled and made for golden hour.', art: '🫐' },
+  { id: 'classic-cold-coffee', name: 'Classic Cold Coffee', category: 'coffee', label: 'Cold coffee', price: 69, description: 'Creamy, cold and always the right answer.', visual: 'coffee' },
+  { id: 'dark-chocolate-coffee', name: 'Dark Chocolate Coffee', category: 'coffee', label: 'Cold coffee', price: 79, description: 'Deep cocoa, soft sweetness, zero regrets.', visual: 'coffee-dark' },
+  { id: 'oreo-coffee', name: 'Oreo Cold Coffee', category: 'coffee', label: 'Cold coffee', price: 89, description: 'Cookie-loaded for serious cravings.', visual: 'coffee-oreo' },
+  { id: 'kulhad-chai', name: 'Kulhad Masala Chai', category: 'coffee', label: 'Chai', price: 20, description: 'Spiced, warm and poured in a little kulhad.', visual: 'chai' },
+  { id: 'crispy-vada-pav', name: 'Crispy Vada Pav', category: 'bites', label: 'Mumbai special', price: 45, description: 'Crunchy, buttery and properly chutney-d.', visual: 'burger-small' },
+  { id: 'paneer-burger', name: 'Paneer Patty Burger', category: 'bites', label: 'Burgers', price: 99, description: 'Big flavour, soft bun, full comfort mode.', visual: 'burger' },
+  { id: 'salty-fries', name: 'Classic Salty Fries', category: 'bites', label: 'Quick bites', price: 69, description: 'The table disappears when these arrive.', visual: 'fries' },
+  { id: 'kurkure-momos', name: 'Veg Kurkure Momos', category: 'bites', label: 'Quick bites', price: 99, description: 'Ten crispy reasons to share. Or not.', visual: 'momos' },
+  { id: 'mix-veg-sandwich', name: 'Mix Veg Sandwich', category: 'sandwiches', label: 'Hot & grill', price: 49, description: 'Toasty, cheesy and made for one-hand eating.', visual: 'sandwich' },
+  { id: 'paneer-tikka-sandwich', name: 'Paneer Tikka Sandwich', category: 'sandwiches', label: 'Hot & grill', price: 59, description: 'Smoky paneer, melty cheese, toasted edges.', visual: 'sandwich-dark' },
+  { id: 'pizza-sandwich', name: 'Mix Veg Pizza Sandwich', category: 'sandwiches', label: 'Hot & grill', price: 69, description: 'Pizza energy, sandwich convenience.', visual: 'sandwich' },
+  { id: 'watermelon-ice', name: 'Watermelon Ice', category: 'coolers', label: 'Mojito', price: 59, description: 'Fresh, fizzy and very good at disappearing.', visual: 'cooler' },
+  { id: 'lemon-mint', name: 'Lemon Cool Mint', category: 'coolers', label: 'Mojito', price: 59, description: 'Bright citrus with a cool mint finish.', visual: 'cooler-green' },
+  { id: 'blueberry-ice-tea', name: 'Blueberry Ice Tea', category: 'coolers', label: 'Ice tea', price: 59, description: 'Fruity, chilled and made for golden hour.', visual: 'cooler-blue' },
 ];
 
 const whatsappNumber = '918800325150';
@@ -20,6 +20,11 @@ const menuGrid = document.querySelector('#menu-grid');
 const categoryButtons = [...document.querySelectorAll('.menu-tab')];
 const orderList = document.querySelector('#order-list');
 const orderTotal = document.querySelector('#order-total');
+const cartDock = document.querySelector('#cart-dock');
+const cartDockCopy = document.querySelector('#cart-dock-copy');
+const cartDockTotal = document.querySelector('#cart-dock-total');
+const cartDockCount = document.querySelector('.cart-dock__icon span');
+const cartHeadCount = document.querySelector('#cart-head-count');
 const selectedOrder = new Map();
 
 function renderMenu(category = 'all') {
@@ -28,19 +33,34 @@ function renderMenu(category = 'all') {
   menuGrid.innerHTML = visibleItems.map((item, index) => `
     <article class="menu-card" style="animation-delay:${index * 45}ms">
       <div class="menu-card__head"><span class="menu-card__category">${item.label}</span><span class="menu-card__price">₹${item.price}</span></div>
-      <div class="menu-card__art" aria-hidden="true">${item.art}</div>
+      <div class="menu-card__art menu-card__art--${item.visual}" aria-hidden="true"><span class="art-main"></span><span class="art-detail"></span><span class="art-highlight"></span></div>
       <h3>${item.name}</h3><p>${item.description}</p>
       <button class="menu-card__add" type="button" data-add-id="${item.id}" aria-label="Add ${item.name} to preorder">+</button>
     </article>
   `).join('');
-  menuGrid.querySelectorAll('[data-add-id]').forEach((button) => button.addEventListener('click', () => addToOrder(button.dataset.addId)));
+  menuGrid.querySelectorAll('[data-add-id]').forEach((button) => button.addEventListener('click', () => addToOrder(button.dataset.addId, button)));
 }
 
-function addToOrder(id) {
+function addToOrder(id, sourceButton) {
   selectedOrder.set(id, (selectedOrder.get(id) || 0) + 1);
+  flyToCart(sourceButton);
   renderOrder();
   const card = document.querySelector(`[data-add-id="${id}"]`)?.closest('.menu-card');
   card?.animate([{ transform: 'scale(1)' }, { transform: 'scale(.96)' }, { transform: 'scale(1)' }], { duration: 260 });
+}
+
+function flyToCart(sourceButton) {
+  const source = sourceButton?.closest('.menu-card')?.querySelector('.menu-card__art');
+  if (!source || !cartDock) return;
+  const sourceRect = source.getBoundingClientRect();
+  const targetRect = cartDock.getBoundingClientRect();
+  const flyer = source.cloneNode(true);
+  flyer.classList.add('cart-flyer');
+  Object.assign(flyer.style, { left: `${sourceRect.left}px`, top: `${sourceRect.top}px`, width: `${sourceRect.width}px`, height: `${sourceRect.height}px` });
+  document.body.appendChild(flyer);
+  flyer.animate([{ left: `${sourceRect.left}px`, top: `${sourceRect.top}px`, transform: 'scale(1) rotate(0deg)', opacity: 1 }, { left: `${targetRect.left + targetRect.width / 2 - 20}px`, top: `${targetRect.top + targetRect.height / 2 - 20}px`, transform: 'scale(.2) rotate(28deg)', opacity: .1 }], { duration: 720, easing: 'cubic-bezier(.2,.8,.2,1)' }).finished.then(() => flyer.remove()).catch(() => flyer.remove());
+  cartDock.classList.remove('cart-dock--pulse');
+  requestAnimationFrame(() => cartDock.classList.add('cart-dock--pulse'));
 }
 
 function changeQuantity(id, delta) {
@@ -52,6 +72,14 @@ function changeQuantity(id, delta) {
 function renderOrder() {
   if (!orderList || !orderTotal) return;
   const items = [...selectedOrder.entries()].map(([id, quantity]) => ({ item: menuItems.find((item) => item.id === id), quantity })).filter(({ item }) => item);
+  const quantityTotal = items.reduce((total, { quantity }) => total + quantity, 0);
+  const valueTotal = items.reduce((total, { item, quantity }) => total + item.price * quantity, 0);
+  if (cartDockCount) cartDockCount.textContent = quantityTotal;
+  if (cartDockTotal) cartDockTotal.textContent = valueTotal;
+  if (cartHeadCount) cartHeadCount.textContent = `${quantityTotal} ${quantityTotal === 1 ? 'item' : 'items'}`;
+  cartDock?.classList.toggle('cart-dock--filled', quantityTotal > 0);
+  if (cartDockCopy) cartDockCopy.textContent = quantityTotal ? `${quantityTotal} ${quantityTotal === 1 ? 'item' : 'items'} · Tap to view` : 'Add something delicious';
+  cartDock?.setAttribute('aria-label', quantityTotal ? `View cart with ${quantityTotal} items` : 'View your empty cart');
   if (!items.length) {
     orderList.innerHTML = '<div class="order-empty">Your order is empty.<br /><span>Tap <b>+</b> on a menu item above.</span></div>';
     orderTotal.textContent = '0';
@@ -61,7 +89,7 @@ function renderOrder() {
     <div class="order-row"><span class="order-row__name">${item.name}</span><span class="order-row__price">₹${item.price * quantity}</span><span class="order-qty"><button type="button" data-quantity-id="${item.id}" data-delta="-1" aria-label="Remove one ${item.name}">−</button><span>${quantity}</span><button type="button" data-quantity-id="${item.id}" data-delta="1" aria-label="Add one ${item.name}">+</button></span></div>
   `).join('');
   orderList.querySelectorAll('[data-quantity-id]').forEach((button) => button.addEventListener('click', () => changeQuantity(button.dataset.quantityId, Number(button.dataset.delta))));
-  orderTotal.textContent = items.reduce((total, { item, quantity }) => total + item.price * quantity, 0);
+  orderTotal.textContent = valueTotal;
 }
 
 categoryButtons.forEach((button) => button.addEventListener('click', () => {
@@ -77,6 +105,7 @@ const siteNav = document.querySelector('.site-nav');
 function toggleMenu(open) { menuToggle?.classList.toggle('is-open', open); siteNav?.classList.toggle('is-open', open); document.body.classList.toggle('menu-open', open); menuToggle?.setAttribute('aria-expanded', String(open)); }
 menuToggle?.addEventListener('click', () => toggleMenu(!siteNav.classList.contains('is-open')));
 siteNav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => toggleMenu(false)));
+cartDock?.addEventListener('click', () => document.querySelector('#preorder')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
 
 function animateCounters() {
   document.querySelectorAll('[data-count]').forEach((counter) => {

@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="CNG Cafe — Chai, Nashta, Gupshup and the city's smoothest cold coffee." />
     <title>CNG CAFE — Chai. Nashta. Gupshup.</title>
-    <link rel="icon" type="image/jpeg" href="assets/logo.jpeg" />
+    <link rel="icon" type="image/jpeg" href="assets/cng-logo-user.jpeg" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="enhancements.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
@@ -16,10 +17,16 @@
 
     <div class="announcement"><span class="live-dot"></span><span>Now serving slow sips & good energy</span><a href="#preorder">Pre-order your table <b>↗</b></a></div>
 
+    <button class="cart-dock" id="cart-dock" type="button" aria-label="View your empty cart">
+      <span class="cart-dock__icon"><span>0</span>▱</span>
+      <span class="cart-dock__copy"><small>Your cart</small><b id="cart-dock-copy">Add something delicious</b></span>
+      <strong>₹<b id="cart-dock-total">0</b></strong><span class="cart-dock__arrow">↗</span>
+    </button>
+
     <header class="site-header">
-      <a class="brand" href="#home" aria-label="CNG Cafe home"><span class="brand__logo"><img src="assets/logo.jpeg" alt="CNG Cafe logo" /></span><span class="brand__text">CNG<small>CAFE</small></span></a>
+      <a class="brand" href="#home" aria-label="CNG Cafe home"><span class="brand__logo"><img src="assets/cng-logo-user.jpeg" alt="CNG Cafe logo" /></span><span class="brand__text">CNG<small>CAFE</small></span></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span><b class="sr-only">Open menu</b></button>
-      <nav class="site-nav" id="site-nav" aria-label="Main navigation"><a href="#menu">Menu</a><a href="#about">Our story</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a><a class="nav-order" href="#preorder">Pre-order <span>↗</span></a></nav>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation"><a href="#menu">Menu</a><a href="#about">Our story</a><a href="#members">Members</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a><a class="nav-order" href="#preorder">Pre-order <span>↗</span></a></nav>
     </header>
 
     <main>
@@ -54,9 +61,15 @@
 
       <section class="stats section-shell" data-reveal><div class="stat"><strong data-count="5000">0</strong><span>Happy<br />Customers</span></div><div class="stat"><strong data-count="10">0</strong><span>Menu<br />Categories</span></div><div class="stat"><strong data-count="4.9">0</strong><span>Google<br />Rating</span></div><div class="stat"><strong data-count="1">0</strong><span>Cozy<br />Location</span></div></section>
 
+      <section class="members section-shell" id="members" data-reveal>
+        <div class="members__seal"><span>✦</span><strong>CNG</strong><small>exclusive</small></div>
+        <div class="members__copy"><p class="kicker kicker--gold"><span></span> The inner circle</p><h2>Good taste<br />gets <em>rewarded.</em></h2><p>Join the CNG Circle for first sips of new specials, secret combo prices and a little extra love every time you pull up a chair.</p></div>
+        <div class="members__perks"><div><b>01</b><span>Members-only<br />menu drops</span></div><div><b>02</b><span>Priority<br />pre-orders</span></div><div><b>03</b><span>Birthday<br />surprises</span></div></div>
+      </section>
+
       <section class="preorder section-shell" id="preorder">
         <div class="preorder__intro" data-reveal><p class="kicker kicker--gold"><span></span> Skip the wait</p><h2>Make your<br /><em>pre-order.</em></h2><p>Pick your favourites, tell us when you’re coming and send it straight to CNG Cafe on WhatsApp.</p><div class="preorder__steps"><span><b>01</b> Pick</span><span><b>02</b> Fill</span><span><b>03</b> Send</span></div></div>
-        <div class="order-card" data-reveal data-delay="120"><div class="order-card__head"><div><span class="mini-icon">✦</span><h3>Your CNG order</h3></div><span class="order-status"><i></i> Ready to send</span></div><div class="order-list" id="order-list"><div class="order-empty">Your order is empty.<br /><span>Tap <b>+</b> on a menu item above.</span></div></div><div class="order-total"><span>Estimated total</span><strong>₹<b id="order-total">0</b></strong></div><form class="preorder-form" id="preorder-form"><label>Your name<input required name="name" type="text" placeholder="e.g. Riya" autocomplete="name" /></label><label>Mobile number<input required name="phone" type="tel" placeholder="10-digit number" inputmode="numeric" autocomplete="tel" /></label><label>Pick-up time<select name="pickup"><option>In 20–30 minutes</option><option>Today evening</option><option>Tomorrow morning</option><option>I’ll confirm on WhatsApp</option></select></label><label class="form-wide">Anything we should know?<textarea name="notes" rows="2" placeholder="Extra cheese, less ice, birthday note... "></textarea></label><button class="button button--gold form-wide" type="submit">Send order on WhatsApp <span>↗</span></button><p class="form-note form-wide">We’ll open WhatsApp with your order ready to send to <b>+91 88003 25150</b>.</p></form></div>
+        <div class="order-card" data-reveal data-delay="120"><div class="order-card__head"><div><span class="mini-icon">✦</span><h3>Your CNG order</h3></div><span class="order-status"><i></i> <b id="cart-head-count">0 items</b> · Ready to send</span></div><div class="order-list" id="order-list"><div class="order-empty">Your order is empty.<br /><span>Tap <b>+</b> on a menu item above.</span></div></div><div class="order-total"><span>Estimated total</span><strong>₹<b id="order-total">0</b></strong></div><form class="preorder-form" id="preorder-form"><label>Your name<input required name="name" type="text" placeholder="e.g. Riya" autocomplete="name" /></label><label>Mobile number<input required name="phone" type="tel" placeholder="10-digit number" inputmode="numeric" autocomplete="tel" /></label><label>Pick-up time<select name="pickup"><option>In 20–30 minutes</option><option>Today evening</option><option>Tomorrow morning</option><option>I’ll confirm on WhatsApp</option></select></label><label class="form-wide">Anything we should know?<textarea name="notes" rows="2" placeholder="Extra cheese, less ice, birthday note... "></textarea></label><button class="button button--gold form-wide" type="submit">Send order on WhatsApp <span>↗</span></button><p class="form-note form-wide">We’ll open WhatsApp with your order ready to send to <b>+91 88003 25150</b>.</p></form></div>
       </section>
 
       <section class="gallery section-shell" id="gallery"><div class="section-top" data-reveal><div><p class="kicker kicker--gold"><span></span> What our wall says</p><h2>Good vibes<br /><em>only.</em></h2></div><a class="button button--line button--line-dark" href="#contact">Visit CNG <span>↗</span></a></div><div class="gallery-grid" data-reveal data-delay="100"><figure class="gallery-card gallery-card--wide"><img src="assets/ambience-wall.jpeg" alt="CNG Cafe quote wall" loading="lazy" /><figcaption>the walls have stories too</figcaption></figure><figure class="gallery-card gallery-card--tall"><img src="assets/ambience-posters.jpeg" alt="CNG Cafe framed posters" loading="lazy" /><figcaption>come as you are</figcaption></figure><figure class="gallery-card gallery-card--board"><img src="assets/menu-board.jpeg" alt="CNG Cafe menu board" loading="lazy" /><figcaption>the original menu board</figcaption></figure><figure class="gallery-card gallery-card--logo"><img src="assets/logo.jpeg" alt="CNG Cafe logo" loading="lazy" /><figcaption>see you soon ✦</figcaption></figure></div></section>
