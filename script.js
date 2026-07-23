@@ -16,11 +16,13 @@ const defaultMenuItems = [
 ];
 
 const savedMenu = JSON.parse(localStorage.getItem('cngCafeMenu') || 'null');
-const menuItems = Array.isArray(savedMenu) && savedMenu.length ? savedMenu : defaultMenuItems;
+let menuItems = Array.isArray(savedMenu) && savedMenu.length ? savedMenu : defaultMenuItems;
 
 const whatsappNumber = '918800325150';
-const cafeSettings = JSON.parse(localStorage.getItem('cngCafeSettings') || '{}');
-const configuredWhatsapp = cafeSettings.whatsapp || whatsappNumber;
+let cafeSettings = JSON.parse(localStorage.getItem('cngCafeSettings') || '{}');
+let configuredWhatsapp = cafeSettings.whatsapp || whatsappNumber;
+const supabaseConfig = window.CNG_SUPABASE_CONFIG;
+const supabaseClient = window.supabase && supabaseConfig ? window.supabase.createClient(supabaseConfig.url, supabaseConfig.publishableKey) : null;
 const menuGrid = document.querySelector('#menu-grid');
 const categoryButtons = [...document.querySelectorAll('.menu-tab')];
 const orderList = document.querySelector('#order-list');
@@ -32,17 +34,31 @@ const cartDockCount = document.querySelector('.cart-dock__icon span');
 const cartHeadCount = document.querySelector('#cart-head-count');
 const selectedOrder = new Map();
 
-document.querySelectorAll('a[href^="tel:"]').forEach((link) => {
-  if (cafeSettings.contact) {
-    const digits = cafeSettings.contact.replace(/[^0-9+]/g, '');
-    link.href = `tel:${digits}`;
-    link.textContent = cafeSettings.contact;
-  }
-});
-document.querySelectorAll('.form-note b').forEach((label) => { if (cafeSettings.contact) label.textContent = cafeSettings.contact; });
-document.querySelectorAll('a[href*="instagram.com"]').forEach((link) => { if (cafeSettings.instagram) link.href = cafeSettings.instagram; });
 const announcementCopy = document.querySelector('.announcement > span:nth-child(2)');
-if (announcementCopy && cafeSettings.announcement) announcementCopy.textContent = cafeSettings.announcement;
+
+function applyCafeSettings() {
+  configuredWhatsapp = cafeSettings.whatsapp || whatsappNumber;
+  document.querySelectorAll('a[href^="tel:"]').forEach((link) => {
+    if (cafeSettings.contact) {
+      const digits = cafeSettings.contact.replace(/[^0-9+]/g, '');
+      link.href = `tel:${digits}`;
+      link.textContent = cafeSettings.contact;
+    }
+  });
+  document.querySelectorAll('.form-note b').forEach((label) => { if (cafeSettings.contact) label.textContent = cafeSettings.contact; });
+  document.querySelectorAll('a[href*="instagram.com"]').forEach((link) => { if (cafeSettings.instagram) link.href = cafeSettings.instagram; });
+  if (announcementCopy && cafeSettings.announcement) announcementCopy.textContent = cafeSettings.announcement;
+}
+
+async function loadSharedCafeData() {
+  if (!supabaseClient) return;
+  const { data, error } = await supabaseClient.from(supabaseConfig.table).select('menu, settings').eq('id', supabaseConfig.rowId).single();
+  if (error || !data) return;
+  if (Array.isArray(data.menu) && data.menu.length) menuItems = data.menu;
+  if (data.settings && typeof data.settings === 'object') cafeSettings = data.settings;
+  applyCafeSettings();
+  renderMenu(document.querySelector('.menu-tab.is-active')?.dataset.category || 'all');
+}
 
 function renderMenu(category = 'all') {
   if (!menuGrid) return;
@@ -150,6 +166,12 @@ document.querySelector('#preorder-form')?.addEventListener('submit', (event) => 
   window.open(`https://wa.me/${configuredWhatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
 });
 
+applyCafeSettings();
 renderMenu();
 renderOrder();
 updateScrollProgress();
+loadSharedCafeData();
+
+const preloader = document.querySelector('#site-preloader');
+window.addEventListener('load', () => window.setTimeout(() => preloader?.classList.add('is-ready'), 450), { once: true });
+window.setTimeout(() => preloader?.classList.add('is-ready'), 2400);

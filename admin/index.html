@@ -9,20 +9,22 @@
     <link rel="stylesheet" href="../enhancements.css" />
     <link rel="stylesheet" href="../luxury.css" />
     <link rel="stylesheet" href="admin.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../supabase-config.js"></script>
     <script src="admin.js" defer></script>
   </head>
   <body class="admin-body">
     <div class="grain" aria-hidden="true"></div>
     <header class="admin-header section-shell"><a class="brand" href="../"><span class="brand__logo"><img src="../assets/cng-logo-user.jpeg" alt="CNG Cafe logo" /></span><span class="brand__text">CNG<small>CAFE</small></span></a><a class="admin-back" href="../">View live site <span>↗</span></a></header>
     <main class="admin-main section-shell">
-      <section class="admin-login" id="login-screen"><p class="kicker kicker--gold"><span></span> Private counter</p><h1>Welcome<br /><em>behind the bar.</em></h1><p>Manage your menu, contact details and Instagram link from one place.</p><form id="login-form"><label>Admin password<input id="admin-password" type="password" autocomplete="current-password" placeholder="Enter password" required /></label><button class="button button--gold" type="submit">Unlock dashboard <span>↗</span></button><p class="admin-error" id="login-error" role="alert"></p></form><small class="admin-note">CNG CAFE · Owner access</small></section>
+      <section class="admin-login" id="login-screen"><p class="kicker kicker--gold"><span></span> Private counter</p><h1>Welcome<br /><em>behind the bar.</em></h1><p>Sign in with your Supabase owner account. Changes will then reach every customer device.</p><form id="login-form"><label>Email address<input id="admin-email" type="email" autocomplete="email" placeholder="owner@example.com" required /></label><label>Admin password<input id="admin-password" type="password" autocomplete="current-password" placeholder="Enter password" required /></label><button class="button button--gold" type="submit">Unlock dashboard <span>↗</span></button><p class="admin-error" id="login-error" role="alert"></p></form><small class="admin-note">CNG CAFE · Secure owner access</small></section>
       <section class="admin-app" id="admin-app" hidden>
         <div class="admin-title"><div><p class="kicker kicker--gold"><span></span> Owner dashboard</p><h1>Keep it<br /><em>fresh.</em></h1></div><div class="admin-actions"><button class="button button--gold" id="save-all" type="button">Save changes <span>✓</span></button><button class="admin-logout" id="logout" type="button">Lock dashboard</button></div></div>
         <div class="admin-grid">
           <section class="admin-panel"><div class="panel-heading"><div><span>01</span><h2>Café details</h2></div><small>Public site settings</small></div><form class="settings-form" id="settings-form"><label>WhatsApp number<input name="whatsapp" type="text" placeholder="918800325150" /></label><label>Display contact number<input name="contact" type="text" placeholder="+91 88003 25150" /></label><label>Instagram URL<input name="instagram" type="url" placeholder="https://instagram.com/..." /></label><label>Announcement line<input name="announcement" type="text" placeholder="Now serving slow sips & good energy" /></label></form></section>
           <section class="admin-panel admin-menu-panel"><div class="panel-heading"><div><span>02</span><h2>Menu editor</h2></div><button class="admin-add" id="add-item" type="button">+ Add item</button></div><div class="menu-editor" id="menu-editor"></div></section>
         </div>
-        <div class="admin-footer-note"><span>Changes are saved in this browser.</span><button id="reset-data" type="button">Reset demo data</button><p id="save-status" role="status"></p></div>
+        <div class="admin-footer-note"><span>Changes are saved to the shared CNG menu.</span><button id="reset-data" type="button">Reset local preview</button><p id="save-status" role="status"></p></div>
       </section>
     </main>
   </body>
